@@ -13,9 +13,9 @@ import com.springhibernatejsf.model.Person;
 @Repository
 public class PersonDAOImpl implements PersonDAO {
 	
-	private static final Logger logger = LoggerFactory.getLogger(PersonDAOImpl.class);
-	
 	private SessionFactory sessionFactory;
+	
+	private static final Logger logger = LoggerFactory.getLogger(PersonDAOImpl.class);
 	
 	public void setSessionFactory(SessionFactory sf){
 		this.sessionFactory = sf;
@@ -25,7 +25,7 @@ public class PersonDAOImpl implements PersonDAO {
 		Session session = this.sessionFactory.getCurrentSession();
         session.persist(p);
         session.flush();
-        logger.info("Person saved successfully");
+        logger.info("Addition is successful!");
 	}
 	@SuppressWarnings("unchecked")
 	@Override
@@ -33,7 +33,6 @@ public class PersonDAOImpl implements PersonDAO {
         Session session = this.sessionFactory.getCurrentSession();
 		List<Person> personsList = session.createQuery("from Person").list();
         for(Person p : personsList){
-            logger.info("Person List::"+p);
         }
         return personsList;
     }
