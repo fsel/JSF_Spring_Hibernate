@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -23,15 +24,19 @@ public class PersonDAOImpl implements PersonDAO {
 	@Override
 	public void addPerson(Person p){
 		Session session = this.sessionFactory.getCurrentSession();
-        session.persist(p);
+		Transaction transaction = session.beginTransaction();
+        session.saveOrUpdate(p);
         session.flush();
         logger.info("Addition is successful!");
+        transaction.commit();
 	}
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Person> listPersons() {
         Session session = this.sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
 		List<Person> personsList = session.createQuery("from Person").list();
+		transaction.commit();
         for(Person p : personsList){
         }
         return personsList;

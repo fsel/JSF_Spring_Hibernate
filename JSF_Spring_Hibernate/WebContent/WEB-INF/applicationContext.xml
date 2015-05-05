@@ -10,15 +10,11 @@
     <!-- DispatcherServlet Context: defines this servlet's request-processing 
         infrastructure -->
  
-    <!-- Enables the Spring MVC @Controller programming model -->
-    <annotation-driven />
- 
     <!-- Handles HTTP GET requests for /resources/** by efficiently serving 
         up static resources in the ${webappRoot}/resources directory -->
     <resources mapping="/resources/**" location="/resources/" />
- 
- 
-    <beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+ 	
+ 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
         destroy-method="close">
         <beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <beans:property name="url"
